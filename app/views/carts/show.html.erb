@@ -1,0 +1,18 @@
+<h1>カート一覧</h1>
+
+<% if flash[:notice] %>
+    <%= flash[:notice] %>
+<% end %>
+
+<% @cart_item.each do |e| %>
+    <p>
+       商品名：<%= e.product.name %> &nbsp;
+       価格：<%= e.product.price %> &nbsp;
+       個数：<%= e.qty %>
+       <%= link_to "削除", cartitem_path(e.id), data: {turbo_method: :delete} %>
+    </p>
+<% end %>
+
+<p>合計金額：<%= current_cart.total_price %>円</p>
+
+<%= link_to "商品一覧へ", root_path %>

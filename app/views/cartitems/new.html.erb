@@ -1,0 +1,22 @@
+<h1>商品カート登録</h1>
+
+<% if @cart_item.errors.present? %>
+<h3>エラーがあります。</h3>
+<ul>
+  <% @cart_item.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<p>商品名：<%= @product.name %></p>
+<p>商品価格：<%= @product.price %></p>
+
+<%= form_with model: @cart_item, url: cartitems_path(product_id: @product.id), local: true do |f| %>
+    <%= f.label :qty, "個数" %>
+    <%= f.number_field :qty, value: 1, min: 1 %><br>
+    <%= f.submit '商品を登録する' %>
+<% end %>
+<br>
+<%= link_to "商品一覧へ", root_path %>
+
